@@ -12,7 +12,7 @@ const Cart = ({showCart} : CartProp) => {
     <div className={`bg-white md:w-1/4 w-full h-full absolute md:static z-30 ${showCart?'left-full':'left-0'} top-0 px-4 flex flex-col gap-2 transition-all duration-300 scrollbar-thumb-primary scrollbar-track-light`}>
         <div className='flex items-center justify-between'>
           <p>Current Order</p>
-          <FontAwesomeIcon icon={faArrowLeft} onClick={()=>cartBtn()} className='hover:cursor-pointer md:hidden' height={20} width={20} />
+          <FontAwesomeIcon icon={faArrowLeft}  className='hover:cursor-pointer md:hidden' height={20} width={20} />
         </div>
 
         <div className='bg-light md:bg-white rounded-xl w-full h-1/2 md:h-3/5 overflow-y-scroll p-2 md:p-0 md:pr-2 scrollbar-thin'>
