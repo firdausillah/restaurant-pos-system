@@ -1,7 +1,8 @@
 'use client';
 import {useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCity, faArrowRotateLeft, faPenToSquare, faPlus, faClipboard, faClock, faGears } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCity, faArrowRotateLeft, faPenToSquare, faPlus, faGears } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faClipboard } from '@fortawesome/free-regular-svg-icons';
 
 import moment from 'moment';
 import Button from "./Button";
@@ -29,7 +30,7 @@ const Navbar = () => {
                         <FontAwesomeIcon icon={faCity} className='text-white w-[20px]' />
                     </span>
                     <div className="flex flex-col">
-                        <p className="font-regular">Soy Resto</p>
+                        <p className="font-regular">Aruna Resto</p>
                         <p className="text-[8px] text-secondary-1">
                             {currentDate}
                         </p>
