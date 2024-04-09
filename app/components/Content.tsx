@@ -11,7 +11,7 @@ import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import { faPaypal } from '@fortawesome/free-brands-svg-icons';
 
 const Content = () => {
-  const [showCart, setShowCart] = useState(false);
+  const [showCart, setShowCart] = useState(true);
 
     function cartBtn(){
       setShowCart(!showCart);
@@ -102,7 +102,7 @@ const Content = () => {
 
 
     </div>
-  )
+  )   
 }
 
 export default Content
