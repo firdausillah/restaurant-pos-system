@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Card from './Card'
-import { faArrowLeft, faCartShopping, faCheck, faMoneyBill, faMoneyBill1, faMoneyBill1Wave, faMoneyBills, faQrcode} from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faCartShopping, faCheck, faMoneyBills, faQrcode} from '@fortawesome/free-solid-svg-icons'
 import Filter from './Filter';
 import Button from './Button';
 import Cart from './Cart';
@@ -95,7 +95,7 @@ const Content = () => {
                 </div>
 
               </div>
-              <Button title="My Cart" symbol={faCartShopping} type="button" variant="text-white bg-primary text-sm rounded-lg w-full shadow-lg mb-2"  />
+              <Button title="Submit" type="button" variant="text-white bg-primary text-sm rounded-lg w-full shadow-lg mb-2"  />
             </div>
         </div>
       </div>
