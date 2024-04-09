@@ -36,12 +36,41 @@ const Content = () => {
           <FontAwesomeIcon icon={faArrowLeft} onClick={()=>cartBtn()} className='hover:cursor-pointer md:hidden' height={20} width={20} />
         </div>
 
-        <div className='bg-light md:bg-white rounded-xl w-full h-1/2 md:h-3/5 overflow-y-scroll p-2 md:p-0 md:pr-2 scrollbar-thin'>
+        <div className='bg-light md:bg-white rounded-xl w-full h-1/2 overflow-y-scroll p-2 md:p-0 md:pr-2 scrollbar-thin'>
           <div className='grid grid-cols-1 gap-2 p-2 md:px-0 py-2'>
             {Array(5).fill(1).map((_, index) => (
               <HorizontalCard key={index} />
             ))}
           </div>
+        </div>
+
+        <div className='h-1/2 w-full border-t-2 border-primary'>
+            <p className='font-semibold'>Summary</p>
+
+            <div className='flex flex-col text-sm gap-1 text-secondary-1'>
+              <span className='flex justify-between'>
+                <td>Subtotal</td>
+                <td>$67.81</td>
+              </span>
+              <span className='flex justify-between'>
+                <td>Discount sales</td>
+                <td>$0</td>
+              </span>
+              <span className='flex justify-between'>
+                <td>Tax</td>
+                <td>$4.00</td>
+              </span>
+              <span className='border-t-2'></span>
+              <span className='flex justify-between font-semibold text-black text-md'>
+                <td>Total</td>
+                <td>$71.81</td>
+              </span>
+            </div>
+
+            <div className='flex flex-col'>
+              <p className='text-md font-semibold'>Payment Method</p>
+              <div className='bg-primary w-full h-full'>jlk</div>
+            </div>
         </div>
       </div>
 
