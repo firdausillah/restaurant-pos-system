@@ -42,8 +42,8 @@ const Content = () => {
 
         <div className='bg-light lg:bg-white rounded-xl w-full  h-full overflow-y-scroll p-2 lg:p-0 lg:pr-2 scrollbar-thin'>
           <div className='grid grid-cols-1 gap-2 p-2 lg:px-0 py-2'>
-            {Array(5).fill(1).map((_, index) => (
-              <HorizontalCard key={index} />
+            {MenuData.map((data, index) => (
+              <HorizontalCard key={index} nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} />
             ))}
           </div>
         </div>

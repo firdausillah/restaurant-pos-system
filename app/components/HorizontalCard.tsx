@@ -2,22 +2,32 @@ import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
 import { faMinus, faPlus,  } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
-import React from 'react'
+import {React, useState} from 'react'
 
-const HorizontalCard = () => {
+type CardProp = {
+ nama:string;
+ img:string;
+ kategori:string;
+ price:number;
+};
+
+const HorizontalCard = ({nama, img, kategori, price} : CardProp) => {
+  const [current, setCurrent] = useState(0)
+
+  
   return (
      <div className='p-[8px] bg-white lg:bg-light rounded-lg h-full'>
         <div className='rounded-md overflow-hidden relative flex flex-row gap-2'>
             <Image
-                src="/img/food.jpg"
-                alt="Image from Lorem Picsum"
+                src={`/img/${img}`}
+                alt={nama}
                 width={300}
                 height={200}
                 className='object-cover h-16 w-16 rounded-lg aspect-square'
             />
             <div className='flex flex-col justify-between w-full'>
-              <p className='font-semibold text-sm line-clamp-1 text-ellipsis'>Pasta Lasagna bro bukan yang itu</p>
-              <p className='text-xs font-semibold text-primary'>$10.5<span className='text-xs text-secondary-1'>/pcs</span></p>
+              <p className='font-semibold text-sm line-clamp-1 text-ellipsis'>{nama}</p>
+              <p className='text-xs font-semibold text-primary'>${price}<span className='text-xs text-secondary-1'>/pcs</span></p>
               <div className='flex flex-row justify-between items-center'>
                 <span className='flex gap-1 items-center'>
                   <FontAwesomeIcon icon={faMinus} height={8} width={8} className='p-1 bg-secondary-2 w-2 h-2 rounded-sm cursor-pointer' />                  
