@@ -25,7 +25,7 @@ const Content = () => {
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
             {MenuData.map((data, index) => (
-              <Card key={index} data={data} />
+              <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} />
             ))}
           </div>
         </div>
