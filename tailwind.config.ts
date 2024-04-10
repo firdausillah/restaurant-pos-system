@@ -21,6 +21,9 @@ const config: Config = {
         'light-2': '#DCDDDD',
         'dark': '#474443'
       },
+      aspectRatio: {
+        '3/2': '3 / 2',
+      },
     },
   },
   plugins: [

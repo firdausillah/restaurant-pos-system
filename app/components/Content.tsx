@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import { faArrowLeft, faCartShopping, faCheck, faMoneyBills, faQrcode} from '@fortawesome/free-solid-svg-icons'
 import Filter from './Filter';
@@ -8,10 +8,12 @@ import Cart from './Cart';
 import HorizontalCard from './HorizontalCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
-import { faPaypal } from '@fortawesome/free-brands-svg-icons';
+import MenuData from '@/lib/MenuData';
 
 const Content = () => {
   const [showCart, setShowCart] = useState(true);
+
+  // console.log(MenuData);
 
     function cartBtn(){
       setShowCart(!showCart);
@@ -22,8 +24,8 @@ const Content = () => {
         <Filter/>
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
-            {Array(13).fill(1).map((_, index) => (
-              <Card key={index} />
+            {MenuData.map((data, index) => (
+              <Card key={index} data={data} />
             ))}
           </div>
         </div>
@@ -32,7 +34,7 @@ const Content = () => {
         </span>
       </div>
       
-      <div className={`bg-white lg:w-1/4 w-full h-full absolute lg:static z-30 ${showCart?'left-full':'left-0'} top-0 px-4 flex flex-col justify-between gap-2 transition-all duration-300 scrollbar-thumb-primary scrollbar-track-light`}>
+      <div className={`bg-white lg:w-1/4 w-full h-full absolute lg:static z-30 ${showCart?'right-full':'right-0'} top-0 px-4 flex flex-col justify-between gap-2 transition-all duration-300 scrollbar-thumb-primary scrollbar-track-light`}>
         <div className='flex items-center justify-between'>
           <p>Current Order</p>
           <FontAwesomeIcon icon={faArrowLeft} onClick={()=>cartBtn()} className='hover:cursor-pointer lg:hidden' height={20} width={20} />

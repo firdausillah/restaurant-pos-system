@@ -13,7 +13,7 @@ const HorizontalCard = () => {
                 alt="Image from Lorem Picsum"
                 width={300}
                 height={200}
-                className='object-cover h-16 w-16 rounded-lg'
+                className='object-cover h-16 w-16 rounded-lg aspect-square'
             />
             <div className='flex flex-col justify-between w-full'>
               <p className='font-semibold text-sm line-clamp-1 text-ellipsis'>Pasta Lasagna bro bukan yang itu</p>

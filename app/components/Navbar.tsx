@@ -89,6 +89,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
+                <div className={`w-full bg-black h-screen absolute z-40 md:hidden transition-all duration-300 ${showSidebar?'opacity-50':'opacity-0 invisible'}`} onClick={()=>burgerClick()}></div>
             </section>
         </nav>
     )
