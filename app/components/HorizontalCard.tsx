@@ -9,9 +9,10 @@ type CardProp = {
  img:string;
  kategori:string;
  price:number;
+ key:number;
 };
 
-const HorizontalCard = ({nama, img, kategori, price} : CardProp) => {
+const HorizontalCard = ({nama, img, kategori, price, key} : CardProp) => {
   const [current, setCurrent] = useState(0)
 
   
