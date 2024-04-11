@@ -17,9 +17,6 @@ const Cart = ({showCart} : CartProp) => {
 
         <div className='bg-light md:bg-white rounded-xl w-full h-1/2 md:h-3/5 overflow-y-scroll p-2 md:p-0 md:pr-2 scrollbar-thin'>
           <div className='grid grid-cols-1 gap-2 p-2 md:px-0 py-2'>
-            {Array(5).fill(1).map((_, index) => (
-              <HorizontalCard key={index} />
-            ))}
           </div>
         </div>
     </div>
