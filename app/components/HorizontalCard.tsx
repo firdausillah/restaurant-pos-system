@@ -10,7 +10,11 @@ type HorizontalCardProp = {
  kategori:string;
  price:number;
  kode:string;
- menuProp: (data: string) => void;
+ menuProp: (data: CartItem) => void;
+};
+
+type CartItem = {
+ kode:string;
 };
 
 const HorizontalCard = ({nama, img, kategori, price, kode, menuProp} : HorizontalCardProp) => {
