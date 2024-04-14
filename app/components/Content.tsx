@@ -10,7 +10,11 @@ import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import MenuData from '@/lib/MenuData';
 
 type CartItem = {
-  kode: string;
+ nama:string;
+ img:string;
+ kategori:string;
+ price:number;
+ kode:string;
   // Tambahkan properti lain sesuai kebutuhan
 }
 
