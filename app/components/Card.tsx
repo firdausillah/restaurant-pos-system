@@ -9,7 +9,7 @@ type CardProps = {
  kategori:string;
  price:number;
  kode:string;
- menuProp: (data: []) => void;
+ menuProp: (data: addMenuProps) => void;
 };
 
 type addMenuProps = {
