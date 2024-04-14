@@ -34,12 +34,10 @@ const Content = ({searchParams,
 
   // Fungsi untuk menghapus data dari komponen anak (horizontal card)
   const decreaseMenuData = (dataFromChild : string) => {
-    // masukan data ke menu cart
-    setMenuList([...menuList, dataFromChild]);
 
-    // setcartData(
-    //   cartData.filter(a => a.kode !== dataFromChild.kode)
-    // );
+    setcartData(
+      cartData.filter(a => a.kode !== dataFromChild.kode)
+    );
   };
 
   function cartBtn(){
