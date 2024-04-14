@@ -1,13 +1,39 @@
+// 'use client'
 import React from 'react'
 import Button from './Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBowlFood, faCookieBite, faGlassWater, faMagnifyingGlass, faStar } from '@fortawesome/free-solid-svg-icons'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-const Filter = () => {
+type FilterProp = {
+   searchProp: (data: string) => void;
+}
+
+const Filter = ({searchProp} : FilterProp) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  function handleSearch(term: string) {
+    // console.log(term);
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set('query', term);
+    } else {
+      params.delete('query');
+    }
+
+    replace(`${pathname}?${params.toString()}`);
+
+    searchProp(term);
+  }
+
+
   return (
         <div id='filter' className='grid grid-cols-4 mt-2 mb-4 gap-2 scrollbar-thumb-primary scrollbar-track-light'>
             <div id='search' className='col-span-4 md:col-start-1 md:row-start-2 md:col-span-2 rounded-lg overflow-hidden flex flex-row justify-center items-center bg-white'>
-              <input type="text" id='search' className='w-full h-8 px-2 focus:outline-none' placeholder='Search menu...'/>
+              <input type="text" id='search' className='w-full h-8 px-2 focus:outline-none' placeholder='Search menu...'onChange={(e) => {handleSearch(e.target.value);}} defaultValue={searchParams.get('query')?.toString()}/>
               <button className='m-1 p-2 bg-light w-7 h-7 rounded-lg text-md flex items-center justify-center text-secondary-1'><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
             </div>
             <div className='overflow-x-scroll md:overflow-hidden flex gap-2 col-span-3 md:col-start-1 md:row-start-1 md:col-span-4 scrollbar-thin'>

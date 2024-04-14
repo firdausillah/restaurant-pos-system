@@ -4,17 +4,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import {React, useState} from 'react'
 
-type CardProp = {
+type HorizontalCardProp = {
  nama:string;
  img:string;
  kategori:string;
  price:number;
- key:number;
+ kode:string;
+ menuProp: (data: string) => void;
 };
 
-const HorizontalCard = ({nama, img, kategori, price, key} : CardProp) => {
-  const [current, setCurrent] = useState(0)
+const HorizontalCard = ({nama, img, kategori, price, kode, menuProp} : HorizontalCardProp) => {
+  const [count, setCount] = useState(1);
 
+  function plusBtn(){
+    setCount(count+1);
+  }
+
+  function minBtn(){
+    setCount(count-1);
+  }
+
+  const decreaseMenu = () => {
+    let data = {
+      'nama':nama, 
+      'img':img, 
+      'kategori':kategori, 
+      'price':price, 
+      'kode':kode,
+      'count':1
+    };
+
+    menuProp(data);
+  }
   
   return (
      <div className='p-[8px] bg-white lg:bg-light rounded-lg h-full'>
@@ -31,11 +52,11 @@ const HorizontalCard = ({nama, img, kategori, price, key} : CardProp) => {
               <p className='text-xs font-semibold text-primary'>${price}<span className='text-xs text-secondary-1'>/pcs</span></p>
               <div className='flex flex-row justify-between items-center'>
                 <span className='flex gap-1 items-center'>
-                  <FontAwesomeIcon icon={faMinus} height={8} width={8} className='p-1 bg-secondary-2 w-2 h-2 rounded-sm cursor-pointer' />                  
-                  <span className='w-6 flex justify-center'>4</span>
-                  <FontAwesomeIcon icon={faPlus} height={8} width={8} className='p-1 bg-primary w-2 h-2 rounded-sm cursor-pointer text-white' />
+                  <FontAwesomeIcon icon={faMinus} height={8} width={8} className='p-1 bg-secondary-2 w-2 h-2 rounded-sm cursor-pointer' onClick={()=>minBtn()} />                  
+                  <span className='w-6 flex justify-center'>{count}</span>
+                  <FontAwesomeIcon icon={faPlus} height={8} width={8} className='p-1 bg-primary w-2 h-2 rounded-sm cursor-pointer text-white' onClick={()=>plusBtn()} />
                 </span>
-                <FontAwesomeIcon icon={faTrashCan} height={12} width={12} className='text-secondary-1 cursor-pointer'/>
+                <FontAwesomeIcon icon={faTrashCan} height={12} width={12} className='text-secondary-1 cursor-pointer' onClick={()=>decreaseMenu()}/>
               </div>
             </div>
         </div>

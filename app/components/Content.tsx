@@ -4,28 +4,74 @@ import Card from './Card'
 import { faArrowLeft, faCartShopping, faCheck, faMoneyBills, faQrcode} from '@fortawesome/free-solid-svg-icons'
 import Filter from './Filter';
 import Button from './Button';
-import Cart from './Cart';
 import HorizontalCard from './HorizontalCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import MenuData from '@/lib/MenuData';
 
-const Content = () => {
+const Content = ({searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+  };
+}) => {
+  const query = searchParams?.query || '';
+
   const [showCart, setShowCart] = useState(true);
 
-  // console.log(MenuData);
+  const [cartData, setcartData] = useState([]);
+  const [menuList, setMenuList] = useState(MenuData);
 
-    function cartBtn(){
-      setShowCart(!showCart);
-    }
+  // Fungsi untuk menerima data dari komponen anak
+  const increaseMenuData = (dataFromChild : string) => {
+    // masukan data ke menu awal
+    setcartData([...cartData, dataFromChild]);
+
+    // setMenuList(
+    //   menuList.filter(a => a.kode !== dataFromChild.kode)
+    // );
+  };
+
+  // Fungsi untuk menghapus data dari komponen anak (horizontal card)
+  const decreaseMenuData = (dataFromChild : string) => {
+    // masukan data ke menu cart
+    setMenuList([...menuList, dataFromChild]);
+
+    // setcartData(
+    //   cartData.filter(a => a.kode !== dataFromChild.kode)
+    // );
+  };
+
+  function cartBtn(){
+    setShowCart(!showCart);
+  }
+
+  const updateSearch = (dataFromFilter: string) => {
+    
+    // const chemists = menuList.filter(item =>
+    //   item.kategori == dataFromFilter
+    // );
+
+    const datanya = MenuData.filter(item => item.nama.toLowerCase().includes(dataFromFilter.toLowerCase()));
+    
+    // menuList.map((item, index)=>(
+    //   console.log(item.nama)
+    // ));
+    setMenuList(datanya);
+    // console.log(datanya);
+    // console.log(dataFromFilter)
+
+  }
+
+
   return (
     <div className='lg:flex lg:flex-wrap relative h-full overflow-hidden'>
       <div className='h-full bg-light flex flex-col lg:w-3/4 rounded-t-3xl lg:rounded-none px-2 pt-3 scrollbar-thumb-primary scrollbar-track-light'>
-        <Filter/>
+        <Filter searchProp={updateSearch}/>
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
-            {MenuData.map((data, index) => (
-              <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} />
+            {menuList.map((data, index) => (
+              <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} kode={data.kode} menuProp={increaseMenuData} />
             ))}
           </div>
         </div>
@@ -42,9 +88,11 @@ const Content = () => {
 
         <div className='bg-light lg:bg-white rounded-xl w-full  h-full overflow-y-scroll p-2 lg:p-0 lg:pr-2 scrollbar-thin'>
           <div className='grid grid-cols-1 gap-2 p-2 lg:px-0 py-2'>
-            {MenuData.map((data, index) => (
-              <HorizontalCard key={index} nama={data.nama} img={data.img} kategori={data.kategori} price={data.price} />
-            ))}
+            {(cartData.length>0?
+              cartData.map((data, index) => (
+                <HorizontalCard key={index} nama={data.nama} img={data.img} kategori={data.kategori} price={data.price} kode={data.kode} menuProp={decreaseMenuData} />
+              ))
+            : <span className='text-secondary-2'>Choose Menu...</span>)}
           </div>
         </div>
 
