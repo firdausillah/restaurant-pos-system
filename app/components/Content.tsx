@@ -9,6 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import MenuData from '@/lib/MenuData';
 
+type CartItem = {
+  kode: string;
+  // Tambahkan properti lain sesuai kebutuhan
+}
+
 const Content = ({searchParams,
 }: {
   searchParams?: {
@@ -19,11 +24,11 @@ const Content = ({searchParams,
 
   const [showCart, setShowCart] = useState(true);
 
-  const [cartData, setcartData] = useState([]);
+  const [cartData, setcartData] = useState<CartItem[]>([]);
   const [menuList, setMenuList] = useState(MenuData);
 
   // Fungsi untuk menerima data dari komponen anak
-  const increaseMenuData = (dataFromChild : string) => {
+  const increaseMenuData = (dataFromChild : CartItem) => {
     // masukan data ke menu awal
     setcartData([...cartData, dataFromChild]);
 
@@ -33,7 +38,7 @@ const Content = ({searchParams,
   };
 
   // Fungsi untuk menghapus data dari komponen anak (horizontal card)
-  const decreaseMenuData = (dataFromChild : string) => {
+  const decreaseMenuData = (dataFromChild : CartItem) => {
 
     setcartData(
       cartData.filter(a => a.kode !== dataFromChild.kode)
