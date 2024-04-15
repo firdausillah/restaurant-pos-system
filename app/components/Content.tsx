@@ -53,7 +53,9 @@ const Content = ({searchParams,
 
     const datanya = MenuData.filter(item => item.nama.toLowerCase().includes(dataFromFilter.toLowerCase()));
     
-    setMenuList(datanya);
+      {setMenuList(datanya)}
+    <Suspense fallback={<CardSkeleton />}>
+    </Suspense>
 
   }
 
@@ -64,7 +66,7 @@ const Content = ({searchParams,
         <Filter searchProp={updateSearch}/>
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
-            <Suspense fallback={<CardSkeleton/>}>
+            <Suspense fallback={<CardSkeleton />}>
               {menuList.map((data, index) => (
                 <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} kode={data.kode} menuProp={increaseMenuData} />
               ))}
