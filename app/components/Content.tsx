@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import Card from './Card'
 import { faArrowLeft, faCartShopping, faCheck, faMoneyBills, faQrcode} from '@fortawesome/free-solid-svg-icons'
 import Filter from './Filter';
@@ -8,16 +8,7 @@ import HorizontalCard from './HorizontalCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import MenuData from '@/lib/MenuData';
-
-type CardProps = {
- nama:string;
- img:string;
- kategori:string;
- price:number;
- kode:string;
- menuProp: (data: CartItem) => void;
-  // Tambahkan properti lain sesuai kebutuhan
-};
+import { CardSkeleton } from './skeleton';
 
 type CartItem = {
   nama: string;
@@ -44,10 +35,6 @@ const Content = ({searchParams,
   const increaseMenuData = (dataFromChild : CartItem) => {
     // masukan data ke menu awal
     setcartData([...cartData, dataFromChild]);
-
-    // setMenuList(
-    //   menuList.filter(a => a.kode !== dataFromChild.kode)
-    // );
   };
 
   // Fungsi untuk menghapus data dari komponen anak (horizontal card)
@@ -63,19 +50,10 @@ const Content = ({searchParams,
   }
 
   const updateSearch = (dataFromFilter: string) => {
-    
-    // const chemists = menuList.filter(item =>
-    //   item.kategori == dataFromFilter
-    // );
 
     const datanya = MenuData.filter(item => item.nama.toLowerCase().includes(dataFromFilter.toLowerCase()));
     
-    // menuList.map((item, index)=>(
-    //   console.log(item.nama)
-    // ));
     setMenuList(datanya);
-    // console.log(datanya);
-    // console.log(dataFromFilter)
 
   }
 
@@ -86,9 +64,11 @@ const Content = ({searchParams,
         <Filter searchProp={updateSearch}/>
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
-            {menuList.map((data, index) => (
-              <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} kode={data.kode} menuProp={increaseMenuData} />
-            ))}
+            <Suspense fallback={<CardSkeleton/>}>
+              {menuList.map((data, index) => (
+                <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} kode={data.kode} menuProp={increaseMenuData} />
+              ))}
+            </Suspense>
           </div>
         </div>
         <span onClick={()=>cartBtn()} className='hover:cursor-pointer'>
