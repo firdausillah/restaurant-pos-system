@@ -54,8 +54,6 @@ const Content = ({searchParams,
     const datanya = MenuData.filter(item => item.nama.toLowerCase().includes(dataFromFilter.toLowerCase()));
     
       {setMenuList(datanya)}
-    <Suspense fallback={<CardSkeleton />}>
-    </Suspense>
 
   }
 
@@ -63,7 +61,9 @@ const Content = ({searchParams,
   return (
     <div className='lg:flex lg:flex-wrap relative h-full overflow-hidden'>
       <div className='h-full bg-light flex flex-col lg:w-3/4 rounded-t-3xl lg:rounded-none px-2 pt-3 scrollbar-thumb-primary scrollbar-track-light'>
-        <Filter searchProp={updateSearch}/>
+        <Suspense fallback={<CardSkeleton />}>
+          <Filter searchProp={updateSearch}/>
+        </Suspense>
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
             <Suspense fallback={<CardSkeleton />}>
