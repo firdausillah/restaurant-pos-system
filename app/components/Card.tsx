@@ -9,11 +9,15 @@ type CardProps = {
  kategori:string;
  price:number;
  kode:string;
- menuProp: (data: addMenuProps) => void;
+ menuProp: (data: CartItem) => void;
 };
 
-type addMenuProps = {
- kode:string;
+type CartItem = {
+  nama: string;
+  img: string;
+  kategori: string;
+  price: number;
+  kode: string;
 };
 
 // interface ChildComponentProps {
