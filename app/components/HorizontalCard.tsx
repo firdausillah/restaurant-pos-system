@@ -2,7 +2,7 @@ import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
 import { faMinus, faPlus,  } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
-import {React, useState} from 'react'
+import {useState} from 'react'
 
 type HorizontalCardProp = {
  nama:string;
