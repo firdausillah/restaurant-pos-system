@@ -20,7 +20,11 @@ type CardProps = {
 };
 
 type CartItem = {
- kode:string;
+  nama: string;
+  img: string;
+  kategori: string;
+  price: number;
+  kode: string;
 };
 
 const Content = ({searchParams,
