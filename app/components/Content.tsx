@@ -37,11 +37,11 @@ const Content = ({searchParams,
 
   const [showCart, setShowCart] = useState(true);
 
-  const [cartData, setcartData] = useState<CardProps[]>([]);
+  const [cartData, setcartData] = useState<CartItem[]>([]);
   const [menuList, setMenuList] = useState(MenuData);
 
   // Fungsi untuk menerima data dari komponen anak
-  const increaseMenuData = (dataFromChild : CardProps) => {
+  const increaseMenuData = (dataFromChild : CartItem) => {
     // masukan data ke menu awal
     setcartData([...cartData, dataFromChild]);
 
@@ -51,7 +51,7 @@ const Content = ({searchParams,
   };
 
   // Fungsi untuk menghapus data dari komponen anak (horizontal card)
-  const decreaseMenuData = (dataFromChild : CardProps) => {
+  const decreaseMenuData = (dataFromChild : CartItem) => {
 
     setcartData(
       cartData.filter(a => a.kode !== dataFromChild.kode)
