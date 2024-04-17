@@ -1,7 +1,8 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
+import { FilterSkeleton } from './skeleton'
 
 type CardProps = {
  nama:string;
@@ -38,6 +39,8 @@ const Card = ({nama, img, kategori, price, kode, menuProp} : CardProps) => {
     menuProp(data);
   }
   return (
+    <Suspense fallback={<FilterSkeleton />}>
+      {/* <Filter searchProp={updateSearch}/> */}
      <div className='p-[5px] bg-white rounded-lg'>
       {/* <div className='overflow-hidden rounded-lg shadow-lg bg-white'> */}
         <div className='rounded-md overflow-hidden relative'>
@@ -57,6 +60,7 @@ const Card = ({nama, img, kategori, price, kode, menuProp} : CardProps) => {
         </div>
       {/* </div> */}
      </div>
+    </Suspense>
   )
 }
 
