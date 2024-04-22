@@ -9,9 +9,7 @@ export default function Page({
   };
 
 }) {
-  // const query = searchParams?.query;
-  // const category = searchParams?.category;
-  // console.log(searchParams);
+  
   return (
     <>
       {/* <Navbar/> */}
