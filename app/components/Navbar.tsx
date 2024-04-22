@@ -6,14 +6,17 @@ import { faClock, faClipboard } from '@fortawesome/free-regular-svg-icons';
 
 import moment from 'moment';
 import Button from "./Button";
-
-
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
 
     const [faArrowRotateLeftIcon, setFaArrowRotateLeftIcon] = useState(faArrowRotateLeft);
     const [faPenToSquareIcon, setFaPenToSquareIcon] = useState(faPenToSquare);
     const [showSidebar, setShowSidebar] = useState(false);
+
+    const pathName = usePathname();
 
     function burgerClick(){
         setShowSidebar(!showSidebar);
@@ -22,13 +25,14 @@ const Navbar = () => {
     let currentDate = moment().format('ddd, DD MMM');
     return (
         <nav>
-            <section className='grid grid-cols-2 md:grid-cols-12 py-2 md:py-4 pb-4 px-4 w-full gap-3 sticky z-40 bg-white'>
+            <section className='grid grid-cols-2 md:grid-cols-12 py-2 md:py-4 pb-4 px-4 w-full gap-3 sticky z-40 bg-white lg:shadow-sm'>
                 <FontAwesomeIcon icon={faBars} className='text-primary bg-white w-[25px] md:hidden h-[40px]' onClick={()=>burgerClick()} />
 
                 <div className='flex gap-3 items-center justify-end md:col-span-2 h-[40px] md:col-start-11 md:row-start-1 md:w-full'>
-                    <span className='flex justify-center items-center bg-primary text-white p-2 rounded-full h-8 w-8 '>
-                        <FontAwesomeIcon icon={faCity} className='text-white w-[20px]' />
-                    </span>
+                    {/* <span className='flex justify-center items-center bg-primary text-white p-2 rounded-full h-8 w-8 '> */}
+                        {/* <FontAwesomeIcon icon={faCity} className='text-white w-[20px]' /> */}
+                    {/* </span> */}
+                    <Image src={'/aruna-resto-logo-2.png'} height={100} width={100} alt='/aruna-resto-logo.png' className='w-7 h-7' />
                     <div className="flex flex-col">
                         <p className="font-regular">Aruna Resto</p>
                         <p className="text-[8px] text-secondary-1">
@@ -64,28 +68,43 @@ const Navbar = () => {
                     </ul>
                     <ul className='py-5 border-t-2 md:border-0 border-light-2 flex flex-col gap-3 items-start'>
                         <li className='flex gap-3 justify-center items-center text-dark'>
-                            <span className='bg-primary text-white shadow-md w-8 h-8 flex justify-center items-center rounded-md'>
-                                <FontAwesomeIcon icon={faClipboard} />
-                            </span>
-                            <p className='md:hidden'>
-                                Order
-                            </p>
+                            <Link
+                                key={'order'}
+                                href={'order'}
+                            >
+                                <span className={` ${pathName == '/order' ? 'bg-primary text-white shadow-md' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
+                                    <FontAwesomeIcon icon={faClipboard} />
+                                </span>
+                                <p className='md:hidden'>
+                                    Order
+                                </p>
+                            </Link>
                         </li>
                         <li className='flex gap-3 justify-center items-center text-dark'>
-                            <span className='bg-white w-8 h-8 flex justify-center items-center rounded-md'>
-                                <FontAwesomeIcon icon={faClock} />
-                            </span>
-                            <p className='md:hidden'>
-                                History
-                            </p>
+                            <Link
+                                key={'history'}
+                                href={'history'}
+                            >
+                                <span className={` ${pathName == '/history' ? 'bg-primary text-white shadow-md' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
+                                    <FontAwesomeIcon icon={faClock} />
+                                </span>
+                                <p className='md:hidden'>
+                                    History
+                                </p>
+                            </Link>
                         </li>
                         <li className='flex gap-3 justify-center items-center text-dark'>
-                            <span className='bg-white w-8 h-8 flex justify-center items-center rounded-md'>
-                                <FontAwesomeIcon icon={faGears} />
-                            </span>
-                            <p className='md:hidden'>
-                                Options
-                            </p>
+                            <Link
+                                key={'setting'}
+                                href={'setting'}
+                            >
+                                <span className={` ${pathName == '/setting' ? 'bg-primary text-white shadow-md' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
+                                    <FontAwesomeIcon icon={faGears} />
+                                </span>
+                                <p className='md:hidden'>
+                                    Options
+                                </p>
+                            </Link>
                         </li>
                     </ul>
                 </div>

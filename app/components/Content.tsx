@@ -13,28 +13,47 @@ import { FilterSkeleton } from './skeleton';
 type CartItem = {
   nama: string;
   img: string;
-  kategori: string;
+  category: string;
   price: number;
   kode: string;
 };
 
-const Content = ({searchParams,
-}: {
-  searchParams?: {
-    query?: string;
-  };
-}) => {
-  const query = searchParams?.query || '';
+type contentProps = {
+  queryProp?: string;
+  categoryProp?: string; 
+}
 
+function Summary (){
+
+}
+
+function Content ({queryProp, categoryProp} : contentProps) {
+  
   const [showCart, setShowCart] = useState(true);
+
+  const [subTotal, setSubTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [tax, setTax] = useState('0');
+  const [total, setTotal] = useState(0);
 
   const [cartData, setcartData] = useState<CartItem[]>([]);
   const [menuList, setMenuList] = useState(MenuData);
+  
+  useEffect(()=>{
+    const query = queryProp ? queryProp.toLowerCase():'';
+    const category = categoryProp ? categoryProp.toLowerCase():'';
+    const filteredData = MenuData.filter(item => 
+      item.nama.toLowerCase().includes(query) && item.category.toLowerCase().includes(category)
+    );
+    setMenuList(filteredData);
+  }, [queryProp, categoryProp]);
 
   // Fungsi untuk menerima data dari komponen anak
   const increaseMenuData = (dataFromChild : CartItem) => {
     // masukan data ke menu awal
     setcartData([...cartData, dataFromChild]);
+
+    updateSubtotal([...cartData, dataFromChild]);
   };
 
   // Fungsi untuk menghapus data dari komponen anak (horizontal card)
@@ -43,18 +62,17 @@ const Content = ({searchParams,
     setcartData(
       cartData.filter(a => a.kode !== dataFromChild.kode)
     );
+
+    updateSubtotal(cartData.filter(a => a.kode !== dataFromChild.kode));
   };
 
-  function cartBtn(){
-    setShowCart(!showCart);
-  }
-
-  const updateSearch = (dataFromFilter: string) => {
-
-    const datanya = MenuData.filter(item => item.nama.toLowerCase().includes(dataFromFilter.toLowerCase()));
-    
-      {setMenuList(datanya)}
-
+  const updateSubtotal = (dat : any)=>{
+    const upSubtotal = dat.reduce((accumulator : number, currentValue : any) => accumulator + currentValue.price, 0);
+    const upTax = upSubtotal*(10/100);
+    setSubTotal(upSubtotal.toFixed(2));
+    setTax(upTax.toFixed(2));
+    setTotal((upSubtotal+(upSubtotal*(10/100))).toFixed(2));
+  
   }
 
 
@@ -62,33 +80,33 @@ const Content = ({searchParams,
     <div className='lg:flex lg:flex-wrap relative h-full overflow-hidden'>
       <div className='h-full bg-light flex flex-col lg:w-3/4 rounded-t-3xl lg:rounded-none px-2 pt-3 scrollbar-thumb-primary scrollbar-track-light'>
         <Suspense fallback={<FilterSkeleton />}>
-          <Filter searchProp={updateSearch}/>
+          <Filter/>
         </Suspense>
         <div className="overflow-y-scroll h-full flex-1 scrollbar-thin">
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-2 '>
             <Suspense fallback={<FilterSkeleton />}>
               {menuList.map((data, index) => (
-                <Card key={index}  nama = {data.nama} img = {data.img} kategori = {data.kategori} price = {data.price} kode={data.kode} menuProp={increaseMenuData} />
+                <Card key={index}  nama = {data.nama} img = {data.img} category = {data.category} price = {data.price} kode={data.kode} menuProp={increaseMenuData} />
               ))}
             </Suspense>
           </div>
         </div>
-        <span onClick={()=>cartBtn()} className='hover:cursor-pointer'>
+        <span onClick={()=>setShowCart(!showCart)} className='hover:cursor-pointer'>
           <Button title="My Cart" symbol={faCartShopping} type="button" variant="text-white bg-primary text-sm scale-110 w-32 lg:w-auto lg:hidden fixed bottom-5 right-5 shadow-lg"  />
         </span>
       </div>
       
-      <div className={`bg-white lg:w-1/4 w-full h-full absolute lg:static z-30 ${showCart?'right-full':'right-0'} top-0 px-4 flex flex-col justify-between gap-2 transition-all duration-300 scrollbar-thumb-primary scrollbar-track-light`}>
+      <div className={`bg-white lg:w-1/4 w-full h-full absolute lg:static z-30 ${showCart?'right-full':'right-0'} top-0 px-4 flex flex-col justify-between gap-2 transition-all duration-300 scrollbar-thumb-primary scrollbar-track-light lg:mt-2`}>
         <div className='flex items-center justify-between'>
           <p>Current Order</p>
-          <FontAwesomeIcon icon={faArrowLeft} onClick={()=>cartBtn()} className='hover:cursor-pointer lg:hidden' height={20} width={20} />
+          <FontAwesomeIcon icon={faArrowLeft} onClick={()=>setShowCart(!showCart)} className='hover:cursor-pointer lg:hidden' height={20} width={20} />
         </div>
 
         <div className='bg-light lg:bg-white rounded-xl w-full  h-full overflow-y-scroll p-2 lg:p-0 lg:pr-2 scrollbar-thin'>
           <div className='grid grid-cols-1 gap-2 p-2 lg:px-0 py-2'>
             {(cartData.length>0?
               cartData.map((data, index) => (
-                <HorizontalCard key={index} nama={data.nama} img={data.img} kategori={data.kategori} price={data.price} kode={data.kode} menuProp={decreaseMenuData} />
+                <HorizontalCard key={index} nama={data.nama} img={data.img} category={data.category} price={data.price} kode={data.kode} menuProp={decreaseMenuData} />
               ))
             : <span className='text-secondary-2'>Choose Menu...</span>)}
           </div>
@@ -100,20 +118,20 @@ const Content = ({searchParams,
             <div className='flex flex-col text-xs gap-1 text-secondary-1'>
               <span className='flex justify-between'>
                 <p>Subtotal</p>
-                <p>$67.81</p>
+                <p>${subTotal}</p>
               </span>
               <span className='flex justify-between'>
                 <p>Discount sales</p>
-                <p>$0</p>
+                <p>${discount}</p>
               </span>
               <span className='flex justify-between'>
                 <p>Tax</p>
-                <p>$4.00</p>
+                <p>${tax}</p>
               </span>
               <span className='border-t-2'></span>
               <span className='flex justify-between font-semibold text-black tex-sm'>
                 <p>Total</p>
-                <p>$71.81</p>
+                <p>${total}</p>
               </span>
             </div>
 
@@ -143,7 +161,7 @@ const Content = ({searchParams,
                 </div>
 
               </div>
-              <Button title="Submit" type="button" variant="text-white bg-primary text-sm rounded-lg w-full shadow-lg mb-2"  />
+              <Button title="Submit" type="button" variant="text-white bg-primary text-sm rounded-lg w-full shadow-lg mb-2 lg:mb-5"  />
             </div>
         </div>
       </div>

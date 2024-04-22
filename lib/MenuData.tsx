@@ -1,7 +1,7 @@
 const MenuData = [
     {
         "nama": "Nasi Goreng",
-        "kategori": "Food",
+        "category": "Food",
         "img": "nasi-goreng.jpg",
         "kode": "NG01",
         "price": 1.75,
@@ -9,7 +9,7 @@ const MenuData = [
     },
     {
         "nama": "Sate Ayam",
-        "kategori": "Snack, Food",
+        "category": "Snack, Food",
         "img": "sate-ayam.jpg",
         "kode": "SA02",
         "price": 2.10,
@@ -17,7 +17,7 @@ const MenuData = [
     },
     {
         "nama": "Rendang",
-        "kategori": "Snack, Food",
+        "category": "Snack, Food",
         "img": "rendang.jpg",
         "kode": "RD03",
         "price": 2.80,
@@ -25,7 +25,7 @@ const MenuData = [
     },
     {
         "nama": "Nasi Padang",
-        "kategori": "Food",
+        "category": "Food",
         "img": "nasi-padang.jpeg",
         "kode": "NP04",
         "price": 2.45,
@@ -33,7 +33,7 @@ const MenuData = [
     },
     {
         "nama": "Gado-Gado",
-        "kategori": "Food",
+        "category": "Food",
         "img": "gado-gado.jpg",
         "kode": "GG05",
         "price": 1.40,
@@ -41,7 +41,7 @@ const MenuData = [
     },
     {
         "nama": "Soto Betawi",
-        "kategori": "Food",
+        "category": "Food",
         "img": "soto-betawi.jpg",
         "kode": "SB06",
         "price": 2.10,
@@ -49,7 +49,7 @@ const MenuData = [
     },
     {
         "nama": "Pepes Ikan",
-        "kategori": "Food",
+        "category": "Food",
         "img": "pepes-ikan.jpg",
         "kode": "PI07",
         "price": 2.45,
@@ -57,7 +57,7 @@ const MenuData = [
     },
     {
         "nama": "Gudeg",
-        "kategori": "Food",
+        "category": "Food",
         "img": "gudeg.jpg",
         "kode": "GD08",
         "price": 1.75,
@@ -65,7 +65,7 @@ const MenuData = [
     },
     {
         "nama": "Nasi Lawar",
-        "kategori": "Food",
+        "category": "Food",
         "img": "nasi-lawar.jpg",
         "kode": "NL09",
         "price": 1.40,
@@ -73,7 +73,7 @@ const MenuData = [
     },
     {
         "nama": "Coto Makasar",
-        "kategori": "Snack, Food",
+        "category": "Snack, Food",
         "img": "coto-makasar.jpg",
         "kode": "CM10",
         "price": 2.45,
@@ -81,7 +81,7 @@ const MenuData = [
     },
     {
         "nama": "Pisang Goreng",
-        "kategori": "Snack",
+        "category": "Snack",
         "img": "pisang-goreng.jpg",
         "kode": "PG11",
         "price": 0.70,
@@ -89,7 +89,7 @@ const MenuData = [
     },
     {
         "nama": "Bakwan Sayur",
-        "kategori": "Snack",
+        "category": "Snack",
         "img": "bakwan-sayur.jpg",
         "kode": "BS12",
         "price": 0.70,
@@ -97,7 +97,7 @@ const MenuData = [
     },
     {
         "nama": "Pastel",
-        "kategori": "Snack",
+        "category": "Snack",
         "img": "pastel.jpg",
         "kode": "PS13",
         "price": 0.70,
@@ -105,7 +105,7 @@ const MenuData = [
     },
     {
         "nama": "Risol",
-        "kategori": "Snack",
+        "category": "Snack",
         "img": "risol.jpeg",
         "kode": "RS14",
         "price": 0.70,
@@ -113,7 +113,7 @@ const MenuData = [
     },
     {
         "nama": "Onde-onde",
-        "kategori": "Snack",
+        "category": "Snack",
         "img": "onde-onde.jpg",
         "kode": "OO15",
         "price": 0.70,
@@ -121,7 +121,7 @@ const MenuData = [
     },
     {
         "nama": "Klepon",
-        "kategori": "Snack",
+        "category": "Snack",
         "img": "klepon.jpg",
         "kode": "KL16",
         "price": 0.70,
@@ -129,7 +129,7 @@ const MenuData = [
     },
     {
         "nama": "Cendol",
-        "kategori": "Baverage",
+        "category": "Beverage",
         "img": "cendol.jpg",
         "kode": "CD17",
         "price": 1.05,
@@ -137,7 +137,7 @@ const MenuData = [
     },
     {
         "nama": "Es Teh Tarik",
-        "kategori": "Baverage",
+        "category": "Beverage",
         "img": "teh-tarik.jpg",
         "kode": "ET18",
         "price": 0.70,
@@ -145,7 +145,7 @@ const MenuData = [
     },
     {
         "nama": "Bir Pletok",
-        "kategori": "Baverage",
+        "category": "Beverage",
         "img": "bir-pletok.jpg",
         "kode": "BP19",
         "price": 1.05,
@@ -153,7 +153,7 @@ const MenuData = [
     },
     {
         "nama": "Air Mineral",
-        "kategori": "Baverage",
+        "category": "Beverage",
         "img": "air-mineral.jpg",
         "kode": "AM20",
         "price": 0.50,
@@ -161,7 +161,7 @@ const MenuData = [
     },
     {
         "nama": "Wedang Uwuh",
-        "kategori": "Baverage",
+        "category": "Beverage",
         "img": "wedang-uwuh.jpg",
         "kode": "WU21",
         "price": 1.05,
@@ -169,7 +169,7 @@ const MenuData = [
     },
     {
         "nama": "STMJ (Susu, Telor, Madu, Jahe)",
-        "kategori": "Baverage",
+        "category": "Beverage",
         "img": "stmj.jpg",
         "kode": "ST22",
         "price": 1.05,

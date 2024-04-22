@@ -7,7 +7,7 @@ import {useState} from 'react'
 type HorizontalCardProp = {
  nama:string;
  img:string;
- kategori:string;
+ category:string;
  price:number;
  kode:string;
  menuProp: (data: CartItem) => void;
@@ -16,12 +16,12 @@ type HorizontalCardProp = {
 type CartItem = {
   nama: string;
   img: string;
-  kategori: string;
+  category: string;
   price: number;
   kode: string;
 };
 
-const HorizontalCard = ({nama, img, kategori, price, kode, menuProp} : HorizontalCardProp) => {
+const HorizontalCard = ({nama, img, category, price, kode, menuProp} : HorizontalCardProp) => {
   const [count, setCount] = useState(1);
 
   function plusBtn(){
@@ -36,7 +36,7 @@ const HorizontalCard = ({nama, img, kategori, price, kode, menuProp} : Horizonta
     let data = {
       'nama':nama, 
       'img':img, 
-      'kategori':kategori, 
+      'category':category, 
       'price':price, 
       'kode':kode,
       'count':1
