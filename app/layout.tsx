@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="/aruna-resto-logo.png" sizes="any" />
       <body className="h-screen">
-        <Navbar/>
+        {/* <Navbar/> */}
         {children}
       </body>
     </html>
