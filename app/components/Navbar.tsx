@@ -1,5 +1,5 @@
 'use client';
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCity, faArrowRotateLeft, faPenToSquare, faPlus, faGears } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faClipboard } from '@fortawesome/free-regular-svg-icons';
@@ -10,17 +10,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const Navbar = () => {
+import { useDispatch } from 'react-redux';
+import { deleteAllItemCart } from '../redux/slices/CartSlice';
+import { toast } from 'react-toastify';
 
+const Navbar = () => {
+    
     const [faArrowRotateLeftIcon, setFaArrowRotateLeftIcon] = useState(faArrowRotateLeft);
     const [faPenToSquareIcon, setFaPenToSquareIcon] = useState(faPenToSquare);
     const [showSidebar, setShowSidebar] = useState(false);
+    
+    const dispatch = useDispatch();
 
     const pathName = usePathname();
 
     function burgerClick(){
         setShowSidebar(!showSidebar);
     }
+
+    const toastClickReset = () =>{
+    toast.success('Reset Order Success', {
+      autoClose: 1000,
+    });
+  }
 
     let currentDate = moment().format('ddd, DD MMM');
     return (
@@ -49,7 +61,7 @@ const Navbar = () => {
                         {/* <p className="font-regular text-md">#87986</p> */}
                     </div>
                     <span className='border-r-4 border-light-2'></span>
-                    <Button title="Reset order" symbol={faArrowRotateLeftIcon} type="button" variant="text-dark bg-white border-[1.5px] border-light-2 text-[10px] md:text-sm w-full md:w-auto" />
+                    <Button title="Reset Order" symbol={faArrowRotateLeftIcon} type="button" variant="text-dark bg-white border-[1.5px] border-light-2 text-[10px] md:text-sm w-full md:w-auto" onClick={()=>{dispatch(deleteAllItemCart());toastClickReset();}}/>
                     <Button title="Take a note" symbol={faPenToSquareIcon} type="button" variant="text-dark bg-white border-[1.5px] border-light-2 text-[10px] md:text-sm w-full md:w-auto" />
                     <span className='border-r-4 border-light-2 hidden md-block'></span>
                 </div>
@@ -58,7 +70,7 @@ const Navbar = () => {
                 <div className={`w-3/4 md:w-[80px] md:left-0 py-2 h-full px-10 md:px-2 md:items-center flex flex-col bg-white absolute z-50 top-0 transition-all duration-300 shadow-md ${showSidebar?'right-0':'-right-full'}`}>
                     <ul className='py-5 flex items-start'>
                         <li className='flex gap-3 justify-center items-center text-dark'>
-                            <span className='bg-white border-[1px] border-light-2 w-8 h-8 flex justify-center items-center rounded-md'>
+                            <span className='bg-white border-[1px] border-light-2 w-8 h-8 flex justify-center items-center rounded-md hover:scale-105 transition-all duration-150'>
                                 <FontAwesomeIcon icon={faPlus} />
                             </span>
                             <p className='md:hidden'>
@@ -67,12 +79,13 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <ul className='py-5 border-t-2 md:border-0 border-light-2 flex flex-col gap-3 items-start'>
-                        <li className='flex gap-3 justify-center items-center text-dark'>
+                        <li className=''>
                             <Link
                                 key={'order'}
                                 href={'order'}
+                                className='flex gap-3 justify-center items-center text-dark'
                             >
-                                <span className={` ${pathName == '/order' ? 'bg-primary text-white shadow-md' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
+                                <span className={` ${pathName == '/order' ? 'bg-primary text-white shadow-md hover:scale-105 transition-all duration-150' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
                                     <FontAwesomeIcon icon={faClipboard} />
                                 </span>
                                 <p className='md:hidden'>
@@ -80,12 +93,13 @@ const Navbar = () => {
                                 </p>
                             </Link>
                         </li>
-                        <li className='flex gap-3 justify-center items-center text-dark'>
+                        <li className=''>
                             <Link
-                                key={'history'}
-                                href={'history'}
+                                key={'order'}
+                                href={'order'}
+                                className='flex gap-3 justify-center items-center text-dark'
                             >
-                                <span className={` ${pathName == '/history' ? 'bg-primary text-white shadow-md' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
+                                <span className={` ${pathName == '/history' ? 'bg-primary text-white shadow-md' : 'bg-white hover:scale-105 transition-all duration-150 hover:border-[1px] hover:border-light-2'} w-8 h-8 flex justify-center items-center rounded-md`}>
                                     <FontAwesomeIcon icon={faClock} />
                                 </span>
                                 <p className='md:hidden'>
@@ -93,12 +107,13 @@ const Navbar = () => {
                                 </p>
                             </Link>
                         </li>
-                        <li className='flex gap-3 justify-center items-center text-dark'>
+                        <li className=''>
                             <Link
-                                key={'setting'}
-                                href={'setting'}
+                                key={'order'}
+                                href={'order'}
+                                className='flex gap-3 justify-center items-center text-dark'
                             >
-                                <span className={` ${pathName == '/setting' ? 'bg-primary text-white shadow-md' : 'bg-white'} w-8 h-8 flex justify-center items-center rounded-md`}>
+                                <span className={` ${pathName == '/setting' ? 'bg-primary text-white shadow-md' : 'bg-white hover:scale-105 transition-all duration-150 hover:border-[1px] hover:border-light-2'} w-8 h-8 flex justify-center items-center rounded-md`}>
                                     <FontAwesomeIcon icon={faGears} />
                                 </span>
                                 <p className='md:hidden'>

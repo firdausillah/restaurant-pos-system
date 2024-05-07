@@ -7,12 +7,12 @@ type ButtonProps = {
     title: string;
     symbol?: IconProp;
     variant: string;
-
+    onClick?: ()=>void;
 }
 
-const Button = ({type, title, variant, symbol} : ButtonProps) => {
+const Button = ({type, title, variant, symbol, onClick} : ButtonProps) => {
   return (
-    <button type={type} className={`gap-1 rounded-lg py-1 px-3 ${variant}`}>
+    <button type={type} className={`gap-1 rounded-lg py-1 px-3 hover:cursor-pointer ${variant}`} onClick={onClick}>
         {symbol && <FontAwesomeIcon className='mr-1' icon={symbol} height={10} width={10} />}
         <label className="bold-16 whitespace-nowrap">{title}</label>
     </button>
